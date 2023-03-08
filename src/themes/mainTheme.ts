@@ -11,6 +11,7 @@ export const mainTheme = createTheme({
       contrastText: '#666666',
     },
   },
+
   components: {
     MuiCssBaseline: {
       styleOverrides: {
@@ -56,4 +57,5 @@ export const mainTheme = createTheme({
       },
     },
   },
+  typography: { fontFamily: 'Montserrat' },
 });

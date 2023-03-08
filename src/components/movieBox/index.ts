@@ -1,0 +1,1 @@
+export { MovieBox } from './movieBox';

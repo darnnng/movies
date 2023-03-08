@@ -1,5 +1,15 @@
+import { Container } from '@mui/material';
 import React from 'react';
+import { Header } from '../../header';
+import { MoviesList } from '../../moviesList';
 
 export const Catalog = () => {
-  return <div>CatalogCatalogCatalogCatalogCatalog</div>;
+  return (
+    <>
+      <Header />
+      <Container>
+        <MoviesList />
+      </Container>
+    </>
+  );
 };
