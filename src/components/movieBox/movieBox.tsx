@@ -24,6 +24,7 @@ export const MovieBox = ({ movie }: IMovieBoxProps) => {
         src={movie.Poster}
       />
       <Typography>{movie.Title}</Typography>
+      <Typography>{movie.Year}</Typography>
     </Styled.SingleBox>
   );
 };

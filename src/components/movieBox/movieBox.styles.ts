@@ -5,7 +5,7 @@ export const SingleBox = styled(Paper)(() => ({
   flexDirection: 'column',
   justifyContent: 'center',
   padding: '10px',
-  height: '280px',
+  height: '300px',
   width: '300px',
   rowGap: '10px',
   backgroundColor: '#cccccc',

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { makeAutoObservable, toJS } from 'mobx';
-import { IMovie } from '../interfaces/movie.interface';
+import { makeAutoObservable } from 'mobx';
 
 class SingleMovieStore {
   movie: any = {};
