@@ -1,6 +1,6 @@
-import { Paper, styled, Typography } from '@mui/material';
+import { Paper, styled } from '@mui/material';
 
-export const SingleBox = styled(Paper)(({ theme }) => ({
+export const SingleBox = styled(Paper)(() => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -10,7 +10,3 @@ export const SingleBox = styled(Paper)(({ theme }) => ({
   rowGap: '10px',
   backgroundColor: '#eeeeee',
 }));
-
-// export const MovieTitle = styled(Typography)(() => {
-
-// });

@@ -1,15 +1,13 @@
-import { Container } from '@mui/material';
+import { Grid } from '@mui/material';
 import React from 'react';
 import { Header } from '../../header';
 import { MoviesList } from '../../moviesList';
 
 export const Catalog = () => {
   return (
-    <>
+    <Grid sx={{ height: '100%' }}>
       <Header />
-      <Container>
-        <MoviesList />
-      </Container>
-    </>
+      <MoviesList />
+    </Grid>
   );
 };

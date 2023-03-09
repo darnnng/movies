@@ -39,4 +39,4 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
     },
   },
-}));
+})) as typeof InputBase;
