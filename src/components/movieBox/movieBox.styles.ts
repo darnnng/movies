@@ -8,5 +8,10 @@ export const SingleBox = styled(Paper)(() => ({
   height: '280px',
   width: '300px',
   rowGap: '10px',
-  backgroundColor: '#eeeeee',
+  backgroundColor: '#cccccc',
+  '&:hover': {
+    backgroundColor: '#eeeeee',
+    transition: '0.5s',
+    cursor: 'pointer',
+  },
 }));

@@ -1,17 +1,14 @@
-import { styled, Paper, Box } from '@mui/material';
+import { styled, Paper, Box, Button } from '@mui/material';
+import { ISingleBoxProps } from './movieDetails.interface';
 
-export interface ISingleBoxProps {
-  backImage: string;
-}
-
-export const MovieBox = styled(Paper)<ISingleBoxProps>(({ backImage, theme }) => ({
+export const MovieBox = styled(Paper)<ISingleBoxProps>(({ backimage, theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
   height: '500px',
   margin: 'auto',
   marginTop: '80px',
   backgroundSize: 'cover',
-  backgroundImage: `url(${backImage})`,
+  backgroundImage: `url(${backimage})`,
   filter: 'blur(10px)',
   width: '100%',
   zIndex: '0',
@@ -28,8 +25,8 @@ export const MovieBox = styled(Paper)<ISingleBoxProps>(({ backImage, theme }) =>
 }));
 
 export const ImageBox = styled(Box)(({ theme }) => ({
-  height: '300px',
-  width: '300px',
+  height: '350px',
+  width: '350px',
   margin: 'auto',
   marginLeft: '20px',
   [theme.breakpoints.down('md')]: {
@@ -52,4 +49,15 @@ export const Content = styled('div')(({ theme }) => ({
     margin: 'auto',
     flexDirection: 'column',
   },
+  [theme.breakpoints.down('sm')]: {
+    marginTop: '50px',
+  },
+}));
+
+export const BackButton = styled(Button)(() => ({
+  position: 'absolute',
+  top: '20px',
+  right: '20px',
+  width: '120px',
+  zIndex: '15',
 }));
