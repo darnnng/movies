@@ -32,6 +32,7 @@ export const mainTheme = createTheme({
         body: {
           minWidth: 320,
           margin: 0,
+          backgroundColor: 'black',
         },
         '#root': {
           position: 'relative',

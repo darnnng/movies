@@ -1,11 +1,18 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IMovieBoxProps } from './movieBox.interface';
 import * as Styled from './movieBox.styles';
 
 export const MovieBox = ({ movie }: IMovieBoxProps) => {
+  const navigate = useNavigate();
+
+  const handleMovieInfo = () => {
+    navigate(`/catalog/${movie.imdbID}`);
+  };
+
   return (
-    <Styled.SingleBox>
+    <Styled.SingleBox onClick={handleMovieInfo}>
       <Box
         component="img"
         sx={{

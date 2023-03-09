@@ -1,6 +1,6 @@
 import { Grid, styled } from '@mui/material';
 
-export const MovieListBox = styled(Grid)(({ theme }) => ({
+export const MovieListBox = styled(Grid)(() => ({
   display: 'flex',
   justifyContent: 'center',
   height: '100%',
@@ -9,7 +9,4 @@ export const MovieListBox = styled(Grid)(({ theme }) => ({
   columnGap: 20,
   rowGap: 20,
   padding: 10,
-  [theme.breakpoints.down('sm')]: {
-    justifyContent: 'center',
-  },
 }));

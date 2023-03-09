@@ -7,16 +7,17 @@ import * as Styled from './moviesList.styles';
 
 export const MoviesList = observer(() => {
   useEffect(() => {
-    moviesStore.fetchMovies();
+    if (!moviesStore.movies.length) {
+      moviesStore.fetchMovies();
+    }
   }, []);
 
   return (
     <Styled.MovieListBox container>
-      {moviesStore.isLoading ? (
-        <Spinner />
-      ) : (
-        moviesStore.filteredMovie?.map((movie) => <MovieBox key={movie.imdbID} movie={movie} />)
-      )}
+      {moviesStore.isLoading && <Spinner />}
+      {moviesStore.filteredMovie.length
+        ? moviesStore.filteredMovie?.map((movie) => <MovieBox key={movie.imdbID} movie={movie} />)
+        : 'No movies were found'}
     </Styled.MovieListBox>
   );
 });
