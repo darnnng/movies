@@ -51,6 +51,7 @@ export const MoviesList = observer(() => {
 
   const sortByYear = () => {
     moviesStore.sortMovies();
+    moviesStore.setSortingDirection();
   };
 
   return (

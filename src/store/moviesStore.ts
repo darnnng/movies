@@ -5,6 +5,7 @@ class MoviesStore {
   movies: IMovie[] = [];
   isLoading = false;
   filter = '';
+  sortingIsAsc = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -31,8 +32,15 @@ class MoviesStore {
   clearList() {
     this.movies = [];
   }
+  setSortingDirection() {
+    this.sortingIsAsc = !this.sortingIsAsc;
+  }
   sortMovies() {
-    this.movies.sort((a, b) => Number(a.Year.slice(0, 4)) - Number(b.Year.slice(0, 4)));
+    if (this.sortingIsAsc) {
+      this.movies.sort((a, b) => Number(a.Year.slice(0, 4)) - Number(b.Year.slice(0, 4)));
+      return;
+    }
+    this.movies.sort((a, b) => Number(b.Year.slice(0, 4)) - Number(a.Year.slice(0, 4)));
   }
   get filteredMovie() {
     const regexp = new RegExp(this.filter, 'i');
