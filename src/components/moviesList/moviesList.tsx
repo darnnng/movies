@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 import moviesStore from '../../store/moviesStore';
 import { MovieBox } from '../movieBox';
+import { ImageSlider } from '../slider';
 import { Spinner } from '../spinner';
 import * as Styled from './moviesList.styles';
 
@@ -56,6 +57,17 @@ export const MoviesList = observer(() => {
 
   return (
     <>
+      <Styled.SliderInfo>
+        <Styled.SliderInfoImage>
+          <ImageSlider images={moviesStore.movies} />
+        </Styled.SliderInfoImage>
+        <Box>
+          <Styled.SliderInfoTitle>Find the perfect movie for yourself!</Styled.SliderInfoTitle>
+          <Typography sx={{ fontSize: '28px', color: 'white' }}>
+            Choose from the variety below
+          </Typography>
+        </Box>
+      </Styled.SliderInfo>
       <Styled.ChipBox>
         <Box sx={{ display: 'flex', columnGap: '15px' }}>
           <Styled.SmallChip label="Movies" variant="filled" onClick={getMovies} />
@@ -66,9 +78,9 @@ export const MoviesList = observer(() => {
           <Styled.SortButton onClick={sortByYear}>Sort by year</Styled.SortButton>
         </Box>
       </Styled.ChipBox>
+
       <Styled.MovieListBox container>
         {moviesStore.isLoading && <Spinner />}
-
         {moviesStore.filteredMovie.length
           ? moviesStore.filteredMovie?.map((movie) => <MovieBox key={movie.imdbID} movie={movie} />)
           : 'No movies were found'}
