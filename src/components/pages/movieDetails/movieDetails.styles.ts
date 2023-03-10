@@ -1,4 +1,4 @@
-import { styled, Paper, Box, Button } from '@mui/material';
+import { styled, Paper, Box, Button, Typography } from '@mui/material';
 import { ISingleBoxProps } from './movieDetails.interface';
 
 export const MovieBox = styled(Paper)<ISingleBoxProps>(({ backimage, theme }) => ({
@@ -60,4 +60,9 @@ export const BackButton = styled(Button)(() => ({
   right: '20px',
   width: '120px',
   zIndex: '15',
+}));
+
+export const SmallText = styled(Typography)(() => ({
+  fontSize: '18px',
+  textShadow: '1px 1px 1px #000',
 }));

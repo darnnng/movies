@@ -34,11 +34,19 @@ export const MovieDetails = observer(() => {
           <Styled.Content>
             <Styled.ImageBox component="img" alt="Film poster" src={movie.Poster} />
             <Box sx={{ maxWidth: '500px' }}>
-              <Typography sx={{ fontSize: '30px', fontWeight: 'bold' }}>{movie.Title}</Typography>
-              <Typography sx={{ fontSize: '22px' }}>{movie.Genre}</Typography>
-              <Typography sx={{ fontSize: '18px' }}>Country: {movie.Country}</Typography>
-              <Typography sx={{ fontSize: '18px', mb: 4 }}>Released: {movie.Released}</Typography>
-              <Typography sx={{ fontSize: '18px' }}>{movie.Plot}</Typography>
+              <Typography
+                sx={{ fontSize: '30px', fontWeight: 'bold', textShadow: '1px 1px 1px #000' }}
+              >
+                {movie.Title}
+              </Typography>
+              <Typography sx={{ fontSize: '22px', textShadow: '1px 1px 1px #000' }}>
+                {movie.Genre}
+              </Typography>
+              <Styled.SmallText>Country: {movie.Country}</Styled.SmallText>
+              <Typography sx={{ fontSize: '18px', mb: 4, textShadow: '1px 1px 1px #000' }}>
+                Released: {movie.Released}
+              </Typography>
+              <Styled.SmallText>{movie.Plot}</Styled.SmallText>
             </Box>
           </Styled.Content>
         </>

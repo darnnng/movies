@@ -1,17 +1,40 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import moviesStore from '../../store/moviesStore';
 import { MovieBox } from '../movieBox';
 import { Spinner } from '../spinner';
 import * as Styled from './moviesList.styles';
 
 export const MoviesList = observer(() => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [fetching, setFetching] = useState(true);
+
   useEffect(() => {
-    if (!moviesStore.movies.length) {
-      moviesStore.fetchMovies();
+    if (fetching) {
+      moviesStore.fetchMovies(currentPage);
+      setCurrentPage((prevState) => prevState + 1);
+      setFetching(false);
     }
+  }, [fetching, currentPage]);
+
+  useEffect(() => {
+    document.addEventListener('scroll', scrollHandler);
+    return function() {
+      document.removeEventListener('scroll', scrollHandler);
+    };
   }, []);
+
+  const scrollHandler = (event: any) => {
+    if (
+      event.target.documentElement.scrollHeight -
+        (event.target.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
+      setFetching(true);
+    }
+  };
 
   const getMovies = () => {
     moviesStore.filterMovies();
@@ -23,7 +46,7 @@ export const MoviesList = observer(() => {
 
   const getAllList = () => {
     moviesStore.clearList();
-    moviesStore.fetchMovies();
+    moviesStore.fetchMovies(currentPage);
   };
 
   const sortByYear = () => {

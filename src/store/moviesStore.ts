@@ -10,10 +10,12 @@ class MoviesStore {
     makeAutoObservable(this);
   }
 
-  fetchMovies() {
+  fetchMovies(currentPage: number) {
     this.isLoading = true;
-    fetch('http://www.omdbapi.com/?s=star&page=2&apikey=5cefe06b')
-      .then((response) => response.json())
+    fetch(`http://www.omdbapi.com/?s=star&page=${currentPage}&apikey=5cefe06b`)
+      .then((response) => {
+        return response.json();
+      })
       .then((json) => {
         this.isLoading = false;
         this.movies = [...this.movies, ...json.Search];
