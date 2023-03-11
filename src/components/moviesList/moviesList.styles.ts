@@ -23,7 +23,7 @@ export const ChipBox = styled(Box)(({ theme }) => ({
 }));
 
 export const SmallChip = styled(Chip)(() => ({
-  width: '100px',
+  width: '200px',
   backgroundColor: 'gray',
   color: 'white',
   '&:hover': {

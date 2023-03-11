@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { action, makeAutoObservable } from 'mobx';
 import { IMovie } from '../interfaces/movie.interface';
 
 class MoviesStore {
@@ -14,20 +14,40 @@ class MoviesStore {
   fetchMovies(currentPage: number) {
     this.isLoading = true;
     fetch(`http://www.omdbapi.com/?s=star&page=${currentPage}&apikey=5cefe06b`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => {
-        this.isLoading = false;
-        this.movies = [...this.movies, ...json.Search];
-      })
+      .then((response) => response.json())
+      .then(
+        action((json) => {
+          this.isLoading = false;
+          this.movies = [...this.movies, ...json.Search];
+        })
+      )
       .catch((err) => console.log(err));
   }
-  filterMovies() {
-    this.movies = this.movies.filter((movie) => movie.Type === 'movie');
+  filterMovies(currentPage: number) {
+    this.clearList();
+    this.isLoading = true;
+    fetch(`http://www.omdbapi.com/?s=star&page=${currentPage}&type=movie&apikey=5cefe06b`)
+      .then((response) => response.json())
+      .then(
+        action((json) => {
+          this.isLoading = false;
+          this.movies = [...json.Search];
+        })
+      )
+      .catch((err) => console.log(err));
   }
-  filterSeries() {
-    this.movies = this.movies.filter((movie) => movie.Type === 'series');
+  filterSeries(currentPage: number) {
+    this.clearList();
+    this.isLoading = true;
+    fetch(`http://www.omdbapi.com/?s=star&page=${currentPage}&type=series&apikey=5cefe06b`)
+      .then((response) => response.json())
+      .then(
+        action((json) => {
+          this.isLoading = false;
+          this.movies = [...json.Search];
+        })
+      )
+      .catch((err) => console.log(err));
   }
   clearList() {
     this.movies = [];

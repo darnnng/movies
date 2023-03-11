@@ -1,6 +1,5 @@
-import { makeAutoObservable } from 'mobx';
+import { action, makeAutoObservable } from 'mobx';
 import { IMovieBox } from './../interfaces/movie.interface';
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 class SingleMovieStore {
   movie: IMovieBox = {
@@ -18,10 +17,12 @@ class SingleMovieStore {
     this.isLoading = true;
     fetch(`http://www.omdbapi.com/?i=${id}&apikey=5cefe06b`)
       .then((response) => response.json())
-      .then((json) => {
-        this.isLoading = false;
-        this.movie = { ...json };
-      })
+      .then(
+        action((json) => {
+          this.isLoading = false;
+          this.movie = { ...json };
+        })
+      )
       .catch((err) => console.log(err));
   }
 }

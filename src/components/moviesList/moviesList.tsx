@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
+import { IMovie } from '../../interfaces/movie.interface';
 import moviesStore from '../../store/moviesStore';
 import { MovieBox } from '../movieBox';
 import { ImageSlider } from '../slider';
@@ -10,14 +11,17 @@ import * as Styled from './moviesList.styles';
 export const MoviesList = observer(() => {
   const [currentPage, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState(true);
+  const [movieArray, setMovieArray] = useState<IMovie[]>([]);
+  const [seriesArray, setSeriesArray] = useState<IMovie[]>([]);
+  const listOfMovies = moviesStore.movies;
 
   useEffect(() => {
-    if (fetching) {
+    if (!!(fetching && !movieArray.length && !seriesArray.length)) {
       moviesStore.fetchMovies(currentPage);
       setCurrentPage((prevState) => prevState + 1);
       setFetching(false);
     }
-  }, [fetching, currentPage]);
+  }, [fetching, currentPage, movieArray.length, seriesArray.length]);
 
   useEffect(() => {
     document.addEventListener('scroll', scrollHandler);
@@ -38,16 +42,19 @@ export const MoviesList = observer(() => {
   };
 
   const getMovies = () => {
-    moviesStore.filterMovies();
+    moviesStore.filterMovies(currentPage);
+    setMovieArray(listOfMovies);
   };
 
   const getSeries = () => {
-    moviesStore.filterSeries();
+    moviesStore.filterSeries(currentPage);
+    setSeriesArray(listOfMovies);
   };
 
   const getAllList = () => {
     moviesStore.clearList();
-    moviesStore.fetchMovies(currentPage);
+    setSeriesArray(() => []);
+    setMovieArray(() => []);
   };
 
   const sortByYear = () => {
@@ -70,9 +77,9 @@ export const MoviesList = observer(() => {
       </Styled.SliderInfo>
       <Styled.ChipBox>
         <Box sx={{ display: 'flex', columnGap: '15px' }}>
-          <Styled.SmallChip label="Movies" variant="filled" onClick={getMovies} />
-          <Styled.SmallChip label="Series" variant="filled" onClick={getSeries} />
-          <Styled.ResetChip label="Reset filter" variant="filled" onClick={getAllList} />
+          <Styled.SmallChip label="Selection of movies" variant="filled" onClick={getMovies} />
+          <Styled.SmallChip label="Selection of series" variant="filled" onClick={getSeries} />
+          <Styled.ResetChip label="See all" variant="filled" onClick={getAllList} />
         </Box>
         <Box>
           <Styled.SortButton onClick={sortByYear}>Sort by year</Styled.SortButton>

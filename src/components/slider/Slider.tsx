@@ -1,5 +1,5 @@
 import { Box, IconButton } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { observer } from 'mobx-react-lite';
@@ -10,6 +10,14 @@ export const ImageSlider = observer(() => {
   const images = moviesStore.moviesList;
   const urls = images.map((element) => element.Poster);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timeout = setTimeout(
+      () => setCurrentIndex((currentIndex + 1 + images.length) % images.length),
+      3000
+    );
+    return () => clearTimeout(timeout);
+  }, [currentIndex, images.length]);
 
   const goToPrevSlide = () => {
     const isFirstSlide = currentIndex === 0;
