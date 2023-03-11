@@ -6,12 +6,7 @@ export const mainTheme = createTheme({
       main: '#2e2e2e',
       contrastText: '#f5f5f7',
     },
-    secondary: {
-      main: '#c63031',
-      contrastText: '#666666',
-    },
   },
-
   components: {
     MuiCssBaseline: {
       styleOverrides: {

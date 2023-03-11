@@ -13,10 +13,10 @@ export const MoviesList = observer(() => {
   const [fetching, setFetching] = useState(true);
   const [movieArray, setMovieArray] = useState<IMovie[]>([]);
   const [seriesArray, setSeriesArray] = useState<IMovie[]>([]);
-  const listOfMovies = moviesStore.movies;
+  const listOfMovies = moviesStore.moviesList;
 
   useEffect(() => {
-    if (!!(fetching && !movieArray.length && !seriesArray.length)) {
+    if (fetching && !movieArray.length && !seriesArray.length) {
       moviesStore.fetchMovies(currentPage);
       setCurrentPage((prevState) => prevState + 1);
       setFetching(false);

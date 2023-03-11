@@ -3,13 +3,16 @@ import React, { useEffect, useState } from 'react';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { observer } from 'mobx-react-lite';
+import { useNavigate } from 'react-router-dom';
 import moviesStore from '../../store/moviesStore';
 import * as Styled from './Slider.styles';
 
 export const ImageSlider = observer(() => {
   const images = moviesStore.moviesList;
   const urls = images.map((element) => element.Poster);
+  const ids = images.map((element) => element.imdbID);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timeout = setTimeout(
@@ -31,6 +34,10 @@ export const ImageSlider = observer(() => {
     setCurrentIndex(newIndex);
   };
 
+  const goToMovieInfo = () => {
+    navigate(`/catalog/${ids[currentIndex]}`);
+  };
+
   return (
     <Box sx={{ height: '100%', position: 'relative' }}>
       <Styled.LeftArrow onClick={goToPrevSlide}>
@@ -43,7 +50,7 @@ export const ImageSlider = observer(() => {
           <KeyboardArrowRightIcon />
         </IconButton>
       </Styled.RightArrow>
-      <Styled.Slide link={urls[currentIndex]} />
+      <Styled.Slide link={urls[currentIndex]} onClick={goToMovieInfo} />
     </Box>
   );
 });

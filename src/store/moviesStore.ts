@@ -13,7 +13,9 @@ class MoviesStore {
 
   fetchMovies(currentPage: number) {
     this.isLoading = true;
-    fetch(`http://www.omdbapi.com/?s=star&page=${currentPage}&apikey=5cefe06b`)
+    fetch(
+      `http://www.omdbapi.com/?s=star&page=${currentPage}&apikey=${process.env.REACT_APP_API_KEY}`
+    )
       .then((response) => response.json())
       .then(
         action((json) => {
@@ -26,7 +28,9 @@ class MoviesStore {
   filterMovies(currentPage: number) {
     this.clearList();
     this.isLoading = true;
-    fetch(`http://www.omdbapi.com/?s=star&page=${currentPage}&type=movie&apikey=5cefe06b`)
+    fetch(
+      `http://www.omdbapi.com/?s=star&page=${currentPage}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`
+    )
       .then((response) => response.json())
       .then(
         action((json) => {
@@ -39,7 +43,9 @@ class MoviesStore {
   filterSeries(currentPage: number) {
     this.clearList();
     this.isLoading = true;
-    fetch(`http://www.omdbapi.com/?s=star&page=${currentPage}&type=series&apikey=5cefe06b`)
+    fetch(
+      `http://www.omdbapi.com/?s=star&page=${currentPage}&type=series&apikey=${process.env.REACT_APP_API_KEY}`
+    )
       .then((response) => response.json())
       .then(
         action((json) => {
