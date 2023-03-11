@@ -23,7 +23,7 @@ export const MovieBox = ({ movie }: IMovieBoxProps) => {
         alt="Film poster"
         src={movie.Poster}
       />
-      <Typography>{movie.Title}</Typography>
+      <Typography sx={{ height: '38px' }}>{movie.Title}</Typography>
       <Typography>{movie.Year}</Typography>
     </Styled.SingleBox>
   );
