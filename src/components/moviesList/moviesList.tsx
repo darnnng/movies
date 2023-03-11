@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
@@ -27,10 +26,11 @@ export const MoviesList = observer(() => {
     };
   }, []);
 
-  const scrollHandler = (event: any) => {
+  const scrollHandler = (event: Event) => {
+    const target = event.target as Document;
     if (
-      event.target.documentElement.scrollHeight -
-        (event.target.documentElement.scrollTop + window.innerHeight) <
+      target.documentElement.scrollHeight -
+        (target.documentElement.scrollTop + window.innerHeight) <
       100
     ) {
       setFetching(true);
@@ -59,7 +59,7 @@ export const MoviesList = observer(() => {
     <>
       <Styled.SliderInfo>
         <Styled.SliderInfoImage>
-          <ImageSlider images={moviesStore.movies} />
+          <ImageSlider />
         </Styled.SliderInfoImage>
         <Box>
           <Styled.SliderInfoTitle>Find the perfect movie for yourself!</Styled.SliderInfoTitle>

@@ -72,7 +72,7 @@ export const SliderInfoImage = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const SliderInfoTitle = styled(Typography)(({ theme }) => ({
+export const SliderInfoTitle = styled(Typography)(() => ({
   fontWeight: 'bold',
   fontSize: '40px',
   color: 'white',

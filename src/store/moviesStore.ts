@@ -42,6 +42,9 @@ class MoviesStore {
     }
     this.movies.sort((a, b) => Number(b.Year.slice(0, 4)) - Number(a.Year.slice(0, 4)));
   }
+  get moviesList() {
+    return this.movies;
+  }
   get filteredMovie() {
     const regexp = new RegExp(this.filter, 'i');
     return this.movies.filter((movie) => !this.filter || regexp.test(movie.Title));

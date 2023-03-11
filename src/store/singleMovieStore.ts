@@ -1,8 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { makeAutoObservable } from 'mobx';
+import { IMovieBox } from './../interfaces/movie.interface';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 class SingleMovieStore {
-  movie: any = {};
+  movie: IMovieBox = {
+    imdbID: '',
+    Title: '',
+    Poster: '',
+  };
   isLoading = false;
 
   constructor() {

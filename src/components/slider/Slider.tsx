@@ -2,10 +2,12 @@ import { Box, IconButton } from '@mui/material';
 import React, { useState } from 'react';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { ISliderProps } from './Slider.interface';
+import { observer } from 'mobx-react-lite';
+import moviesStore from '../../store/moviesStore';
 import * as Styled from './Slider.styles';
 
-export const ImageSlider = ({ images }: ISliderProps) => {
+export const ImageSlider = observer(() => {
+  const images = moviesStore.moviesList;
   const urls = images.map((element) => element.Poster);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -36,4 +38,4 @@ export const ImageSlider = ({ images }: ISliderProps) => {
       <Styled.Slide link={urls[currentIndex]} />
     </Box>
   );
-};
+});
