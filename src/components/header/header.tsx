@@ -10,7 +10,7 @@ import * as Styled from './header.styles';
 
 export const Header = observer(() => {
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    moviesStore.filter = event.target.value;
+    moviesStore.setFilter(event.target.value);
   };
   return (
     <Box sx={{ maxHeight: '64px' }}>

@@ -11,17 +11,16 @@ import * as Styled from './moviesList.styles';
 export const MoviesList = observer(() => {
   const [currentPage, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState(true);
-  const [movieArray, setMovieArray] = useState<IMovie[]>([]);
-  const [seriesArray, setSeriesArray] = useState<IMovie[]>([]);
+  const [selectionArray, setSelectionArray] = useState<IMovie[]>([]);
   const listOfMovies = moviesStore.movies;
 
   useEffect(() => {
-    if (fetching && !movieArray.length && !seriesArray.length) {
+    if (fetching && !selectionArray.length) {
       moviesStore.fetchMovies(currentPage);
       setCurrentPage((prevState) => prevState + 1);
       setFetching(false);
     }
-  }, [fetching, currentPage, movieArray.length, seriesArray.length]);
+  }, [fetching, currentPage, selectionArray.length]);
 
   useEffect(() => {
     document.addEventListener('scroll', scrollHandler);
@@ -43,22 +42,22 @@ export const MoviesList = observer(() => {
 
   const getMovies = () => {
     moviesStore.filterMovies(currentPage);
-    setMovieArray(listOfMovies);
+    setSelectionArray(listOfMovies);
   };
 
   const getSeries = () => {
     moviesStore.filterSeries(currentPage);
-    setSeriesArray(listOfMovies);
+    setSelectionArray(listOfMovies);
   };
 
   const getAllList = () => {
     moviesStore.clearList();
-    setSeriesArray(() => []);
-    setMovieArray(() => []);
+    setCurrentPage(1);
+    setSelectionArray(() => []);
   };
 
   const sortByYear = () => {
-    moviesStore.sortMovies;
+    moviesStore.sortMovies();
     moviesStore.setSortingDirection();
   };
 

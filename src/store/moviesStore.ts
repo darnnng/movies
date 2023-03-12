@@ -19,6 +19,10 @@ class MoviesStore {
     this.isLoading = loading;
   }
 
+  setFilter(value: string) {
+    this.filter = value;
+  }
+
   fetchMovies(currentPage: number) {
     this.isLoading = true;
     fetch(
@@ -63,7 +67,7 @@ class MoviesStore {
   setSortingDirection() {
     this.sortingIsAsc = !this.sortingIsAsc;
   }
-  get sortMovies() {
+  sortMovies() {
     if (this.sortingIsAsc) {
       return this.movies.sort((a, b) => Number(a.Year.slice(0, 4)) - Number(b.Year.slice(0, 4)));
     }
