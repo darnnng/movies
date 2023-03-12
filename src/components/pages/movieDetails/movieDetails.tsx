@@ -4,6 +4,7 @@ import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import moviesStore from '../../../store/moviesStore';
 import singleMovieStore from '../../../store/singleMovieStore';
 import { Spinner } from '../../spinner';
 import * as Styled from './movieDetails.styles';
@@ -18,6 +19,7 @@ export const MovieDetails = observer(() => {
 
   const movie = toJS(singleMovieStore.movie);
   const handleGoToCatalog = () => {
+    moviesStore.clearList();
     navigate(`/catalog`);
   };
 

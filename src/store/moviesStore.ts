@@ -26,7 +26,7 @@ class MoviesStore {
   fetchMovies(currentPage: number) {
     this.isLoading = true;
     fetch(
-      `http://www.omdbapi.com/?s=star&page=${currentPage}&apikey=${process.env.REACT_APP_API_KEY}`
+      `https://www.omdbapi.com/?s=star&page=${currentPage}&apikey=${process.env.REACT_APP_API_KEY}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -39,7 +39,7 @@ class MoviesStore {
     this.clearList();
     this.isLoading = true;
     fetch(
-      `http://www.omdbapi.com/?s=star&page=${currentPage}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`
+      `https://www.omdbapi.com/?s=star&page=${currentPage}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -52,7 +52,7 @@ class MoviesStore {
     this.clearList();
     this.isLoading = true;
     fetch(
-      `http://www.omdbapi.com/?s=star&page=${currentPage}&type=series&apikey=${process.env.REACT_APP_API_KEY}`
+      `https://www.omdbapi.com/?s=star&page=${currentPage}&type=series&apikey=${process.env.REACT_APP_API_KEY}`
     )
       .then((response) => response.json())
       .then((json) => {

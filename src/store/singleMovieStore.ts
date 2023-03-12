@@ -23,7 +23,7 @@ class SingleMovieStore {
 
   fetchMovie(id: string) {
     this.isLoading = true;
-    fetch(`http://www.omdbapi.com/?i=${id}&apikey=${process.env.REACT_APP_API_KEY}`)
+    fetch(`https://www.omdbapi.com/?i=${id}&apikey=${process.env.REACT_APP_API_KEY}`)
       .then((response) => response.json())
       .then((json) => {
         this.setLoading(false);
