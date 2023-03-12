@@ -1,13 +1,16 @@
 import { Box, Typography } from '@mui/material';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import moviesStore from '../../store/moviesStore';
 import { IMovieBoxProps } from './movieBox.interface';
 import * as Styled from './movieBox.styles';
 
-export const MovieBox = ({ movie }: IMovieBoxProps) => {
+export const MovieBox = observer(({ movie }: IMovieBoxProps) => {
   const navigate = useNavigate();
 
   const handleMovieInfo = () => {
+    moviesStore.clearList();
     navigate(`/catalog/${movie.imdbID}`);
   };
 
@@ -27,4 +30,4 @@ export const MovieBox = ({ movie }: IMovieBoxProps) => {
       <Typography>{movie.Year}</Typography>
     </Styled.SingleBox>
   );
-};
+});

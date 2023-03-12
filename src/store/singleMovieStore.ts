@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { IMovieBox } from './../interfaces/movie.interface';
 
 class SingleMovieStore {
@@ -13,16 +13,22 @@ class SingleMovieStore {
     makeAutoObservable(this);
   }
 
+  setMovie(item: IMovieBox) {
+    this.movie = item;
+  }
+
+  setLoading(loading: boolean) {
+    this.isLoading = loading;
+  }
+
   fetchMovie(id: string) {
     this.isLoading = true;
     fetch(`http://www.omdbapi.com/?i=${id}&apikey=${process.env.REACT_APP_API_KEY}`)
       .then((response) => response.json())
-      .then(
-        action((json) => {
-          this.isLoading = false;
-          this.movie = { ...json };
-        })
-      )
+      .then((json) => {
+        this.setLoading(false);
+        this.setMovie({ ...json });
+      })
       .catch((err) => console.log(err));
   }
 }

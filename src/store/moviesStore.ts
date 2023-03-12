@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { IMovie } from '../interfaces/movie.interface';
 
 class MoviesStore {
@@ -11,18 +11,24 @@ class MoviesStore {
     makeAutoObservable(this);
   }
 
+  setMovies(list: IMovie[]) {
+    this.movies = list;
+  }
+
+  setLoading(loading: boolean) {
+    this.isLoading = loading;
+  }
+
   fetchMovies(currentPage: number) {
     this.isLoading = true;
     fetch(
       `http://www.omdbapi.com/?s=star&page=${currentPage}&apikey=${process.env.REACT_APP_API_KEY}`
     )
       .then((response) => response.json())
-      .then(
-        action((json) => {
-          this.isLoading = false;
-          this.movies = [...this.movies, ...json.Search];
-        })
-      )
+      .then((json) => {
+        this.setLoading(false);
+        this.setMovies([...this.movies, ...json.Search]);
+      })
       .catch((err) => console.log(err));
   }
   filterMovies(currentPage: number) {
@@ -32,12 +38,10 @@ class MoviesStore {
       `http://www.omdbapi.com/?s=star&page=${currentPage}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`
     )
       .then((response) => response.json())
-      .then(
-        action((json) => {
-          this.isLoading = false;
-          this.movies = [...json.Search];
-        })
-      )
+      .then((json) => {
+        this.setLoading(false);
+        this.setMovies([...json.Search]);
+      })
       .catch((err) => console.log(err));
   }
   filterSeries(currentPage: number) {
@@ -47,12 +51,10 @@ class MoviesStore {
       `http://www.omdbapi.com/?s=star&page=${currentPage}&type=series&apikey=${process.env.REACT_APP_API_KEY}`
     )
       .then((response) => response.json())
-      .then(
-        action((json) => {
-          this.isLoading = false;
-          this.movies = [...json.Search];
-        })
-      )
+      .then((json) => {
+        this.setLoading(false);
+        this.setMovies([...json.Search]);
+      })
       .catch((err) => console.log(err));
   }
   clearList() {
@@ -61,17 +63,13 @@ class MoviesStore {
   setSortingDirection() {
     this.sortingIsAsc = !this.sortingIsAsc;
   }
-  sortMovies() {
+  get sortMovies() {
     if (this.sortingIsAsc) {
-      this.movies.sort((a, b) => Number(a.Year.slice(0, 4)) - Number(b.Year.slice(0, 4)));
-      return;
+      return this.movies.sort((a, b) => Number(a.Year.slice(0, 4)) - Number(b.Year.slice(0, 4)));
     }
-    this.movies.sort((a, b) => Number(b.Year.slice(0, 4)) - Number(a.Year.slice(0, 4)));
+    return this.movies.sort((a, b) => Number(b.Year.slice(0, 4)) - Number(a.Year.slice(0, 4)));
   }
-  get moviesList() {
-    return this.movies;
-  }
-  get filteredMovie() {
+  get searchMovies() {
     const regexp = new RegExp(this.filter, 'i');
     return this.movies.filter((movie) => !this.filter || regexp.test(movie.Title));
   }

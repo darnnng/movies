@@ -8,7 +8,7 @@ import moviesStore from '../../store/moviesStore';
 import * as Styled from './Slider.styles';
 
 export const ImageSlider = observer(() => {
-  const images = moviesStore.moviesList;
+  const images = moviesStore.movies;
   const urls = images.map((element) => element.Poster);
   const ids = images.map((element) => element.imdbID);
   const [currentIndex, setCurrentIndex] = useState(0);

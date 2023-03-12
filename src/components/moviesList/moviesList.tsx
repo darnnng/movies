@@ -13,7 +13,7 @@ export const MoviesList = observer(() => {
   const [fetching, setFetching] = useState(true);
   const [movieArray, setMovieArray] = useState<IMovie[]>([]);
   const [seriesArray, setSeriesArray] = useState<IMovie[]>([]);
-  const listOfMovies = moviesStore.moviesList;
+  const listOfMovies = moviesStore.movies;
 
   useEffect(() => {
     if (fetching && !movieArray.length && !seriesArray.length) {
@@ -58,7 +58,7 @@ export const MoviesList = observer(() => {
   };
 
   const sortByYear = () => {
-    moviesStore.sortMovies();
+    moviesStore.sortMovies;
     moviesStore.setSortingDirection();
   };
 
@@ -88,8 +88,8 @@ export const MoviesList = observer(() => {
 
       <Styled.MovieListBox container>
         {moviesStore.isLoading && <Spinner />}
-        {moviesStore.filteredMovie.length
-          ? moviesStore.filteredMovie?.map((movie) => <MovieBox key={movie.imdbID} movie={movie} />)
+        {moviesStore.searchMovies.length
+          ? moviesStore.searchMovies?.map((movie) => <MovieBox key={movie.imdbID} movie={movie} />)
           : 'No movies were found'}
       </Styled.MovieListBox>
     </>
